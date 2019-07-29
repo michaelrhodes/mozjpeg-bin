@@ -1,6 +1,6 @@
 {
   "name": "mozjpeg-bin",
-  "version": "1.3.0",
+  "version": "3.3.1",
   "description": "mozjpeg wrapper that makes it seamlessly available as a local dependency",
   "main": "index.js",
   "dependencies": {

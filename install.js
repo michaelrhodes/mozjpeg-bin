@@ -1,13 +1,13 @@
 var os = require('os')
 var path = require('path')
 var build = require('bin-build')
+var pkg = require('./package.json')
 
-var src = 'https://github.com/mozilla/mozjpeg/releases/download/v3.1/mozjpeg-3.1-release-source.tar.gz'
 var dest = path.join(__dirname, '/bin')
 var cores = os.cpus().length
 
 build()
-  .src(src)
+  .src('https://github.com/mozilla/mozjpeg/archive/v' + pkg.version + '.tar.gz')
   .cmd('autoreconf -fiv')
   .cmd([
     './configure',
@@ -18,8 +18,8 @@ build()
     '--bindir="' + dest + '"',
     '--libdir="' + dest + '"'
   ].join(' '))
-  .cmd('make --jobs=' + cores)
-  .cmd('make install --jobs=' + cores)
+  .cmd('make -j' + cores)
+  .cmd('make install -j' + cores)
   .run(function (err) {
     if (err) return console.error(err)
   })
